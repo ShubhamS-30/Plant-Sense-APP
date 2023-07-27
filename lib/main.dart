@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers
-
 import 'package:flutter/material.dart';
 import 'entry_screen.dart';
 
@@ -20,6 +18,7 @@ void main() {
             ),
             child: const Entry()),
       ),
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
