@@ -20,4 +20,5 @@ Disease Currently Include -
 12. Cabbage Black Rot
 
 source code for API -> <https://github.com/ShubhamS-30/Plant-Sense-API>
+
 deployed link -> <https://plant-sense-api.onrender.com/>
