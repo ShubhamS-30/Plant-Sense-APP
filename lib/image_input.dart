@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:google_fonts/google_fonts.dart';
 
 class ImageInput extends StatefulWidget {
   const ImageInput({super.key, required this.onPickImage});
@@ -36,7 +37,7 @@ class _ImageInputState extends State<ImageInput> {
       _takenImage = File(pickedImage.path);
     });
 
-     widget.onPickImage(_takenImage!);
+    widget.onPickImage(_takenImage!);
   }
 
   void _selectAgain() {
@@ -55,9 +56,13 @@ class _ImageInputState extends State<ImageInput> {
         FilledButton.icon(
           onPressed: _takePictureFromCamera,
           icon: const Icon(Icons.camera),
-          label: const Text(
+          label: Text(
             'Take picture',
-            style: TextStyle(fontSize: 25),
+            style: GoogleFonts.ebGaramond(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic),
           ),
           style: FilledButton.styleFrom(
             backgroundColor: Colors.green,
@@ -69,9 +74,13 @@ class _ImageInputState extends State<ImageInput> {
         FilledButton.icon(
           onPressed: _takePictureFromGallery,
           icon: const Icon(Icons.camera),
-          label: const Text(
-            'Select Picture From Gallery',
-            style: TextStyle(fontSize: 25),
+          label: Text(
+            'Select From Gallery',
+            style: GoogleFonts.ebGaramond(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic),
           ),
           style: FilledButton.styleFrom(
             backgroundColor: Colors.green,
