@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 
 class DiseaseClassification extends StatefulWidget {
-  const DiseaseClassification({super.key});
+  const DiseaseClassification({super.key,});
 
   @override
   State<DiseaseClassification> createState() => _DiseaseClassificationState();
@@ -29,7 +29,7 @@ class _DiseaseClassificationState extends State<DiseaseClassification> {
       File file = _selectedImage!;
 
       // for local server
-      // String addr = 'http://172.16.37.149:5000/';
+      // String addr = 'http://192.168.106.226:5000/';
 
       // for hosted api
       String addr = 'https://plant-sense-api.onrender.com/';
