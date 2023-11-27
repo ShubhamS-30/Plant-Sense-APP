@@ -15,10 +15,10 @@ class Entry extends StatefulWidget {
 
 class _EntryState extends State<Entry> {
   // for local server
-  final String addr = 'http://172.16.35.179:5000/';
+  // final String addr = 'http://172.16.35.179:5000/';
 
   // for hosted api
-  // final String addr = 'https://plant-sense-api.onrender.com/';
+  final String addr = 'https://plant-sense-api.onrender.com/';
 
   Future<List> getSpecies() async {
     List<dynamic> ty = [];
