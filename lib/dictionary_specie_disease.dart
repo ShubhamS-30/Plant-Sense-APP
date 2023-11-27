@@ -4,32 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:plant_sense_1/dictionary_specie_disease.dart';
+import 'package:plant_sense_1/display_info.dart';
 
-class Species extends StatelessWidget {
+class SpeciesDisease extends StatelessWidget {
   List<dynamic> arrTypes;
   final String addr;
-  Species({
+  final String species;
+  SpeciesDisease({
     super.key,
     required this.addr,
+    required this.species,
     required this.arrTypes,
   });
 
-  Future<List> getSpecies(String dis) async {
-    List<dynamic> ty = [];
-
-    Uri url = Uri.parse('${addr}api/dict/species/$dis');
+  Future<String> getInfo(String disease) async {
+    dynamic info;
+    disease = disease.replaceAll(RegExp(' +'), '_');
+    Uri url = Uri.parse('${addr}api/info/$disease');
 
     final response = await http.get(url);
     var jsonResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON
-      ty = jsonResponse['Diseases'];
+      info = jsonResponse['Information'];
     } else {
       // If the server did not return a 200 OK response, throw an exception
       throw Exception('Failed to load data');
     }
-    return ty;
+    return info;
   }
 
   @override
@@ -54,16 +56,16 @@ class Species extends StatelessWidget {
                 children: [
                   const SizedBox(height: 50),
                   TextButton(
+                    // onPressed: (){},
                     onPressed: () async {
-                      List<dynamic> types = await getSpecies(arrTypes[index]);
+                      String info = await getInfo(arrTypes[index]);
 
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SpeciesDisease(
-                                  species: arrTypes[index],
-                                  addr: addr,
-                                  arrTypes: types,
+                            builder: (context) => DiseaseInformation(
+                                  info: info,
+                                  disease: arrTypes[index],
                                 )),
                       );
                     },

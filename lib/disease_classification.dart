@@ -7,7 +7,11 @@ import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 
 class DiseaseClassification extends StatefulWidget {
-  const DiseaseClassification({super.key,});
+  final String link;
+  const DiseaseClassification({
+    super.key,
+    required this.link,
+  });
 
   @override
   State<DiseaseClassification> createState() => _DiseaseClassificationState();
@@ -19,6 +23,12 @@ class _DiseaseClassificationState extends State<DiseaseClassification> {
   List<dynamic>? scores = ['Please select an Image'];
   String? response;
 
+  // String get link => link;
+
+  String get link {
+    return widget.link;
+  }
+
   void infrenceModel() async {
     if (_selectedImage == null) {
       setState(() {
@@ -28,11 +38,7 @@ class _DiseaseClassificationState extends State<DiseaseClassification> {
     } else {
       File file = _selectedImage!;
 
-      // for local server
-      // String addr = 'http://192.168.106.226:5000/';
-
-      // for hosted api
-      String addr = 'https://plant-sense-api.onrender.com/';
+      String addr = link;
 
       Uri url = Uri.parse('${addr}api/test');
       String contentType = 'image/jpeg';
@@ -112,11 +118,10 @@ class _DiseaseClassificationState extends State<DiseaseClassification> {
                     child: Text(
                       classes?[index] + '      ' + scores?[index],
                       style: GoogleFonts.ebGaramond(
-                        fontSize: 15,
-                        fontStyle: FontStyle.normal,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300
-                      ),
+                          fontSize: 15,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300),
                     ),
                   );
                 },

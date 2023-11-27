@@ -14,19 +14,20 @@ class Entry extends StatefulWidget {
 }
 
 class _EntryState extends State<Entry> {
-  String test = "TEST";
+  // for local server
+  final String addr = 'http://172.16.35.179:5000/';
+
+  // for hosted api
+  // final String addr = 'https://plant-sense-api.onrender.com/';
+
   Future<List> getSpecies() async {
     List<dynamic> ty = [];
-    // for local server
-    // String addr = 'http://192.168.45.226:5000/';
-
-    // for hosted api
-    String addr = 'https://plant-sense-api.onrender.com/';
 
     Uri url = Uri.parse('${addr}api/dict/species');
 
     final response = await http.get(url);
     var jsonResponse = jsonDecode(response.body);
+    // print(jsonResponse);
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON
       setState(() {
@@ -67,7 +68,7 @@ class _EntryState extends State<Entry> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const DiseaseClassification()),
+                    builder: (context) => DiseaseClassification(link: addr)),
               );
             },
             style: FilledButton.styleFrom(backgroundColor: Colors.green),
@@ -89,10 +90,9 @@ class _EntryState extends State<Entry> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Species(
+                          addr: addr,
                           arrTypes: types,
-                          test: test,
-                    )
-                ),
+                        )),
               );
             },
             style: FilledButton.styleFrom(backgroundColor: Colors.green),
