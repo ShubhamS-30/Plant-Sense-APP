@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:plant_sense_1/dictionary_screen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:plant_sense_1/help.dart';
+import 'biometric_helper.dart';
 
 class Entry extends StatefulWidget {
   const Entry({super.key});
@@ -18,7 +20,7 @@ class _EntryState extends State<Entry> {
   // final String addr = 'http://172.16.35.179:5000/';
 
   // for hosted api
-  final String addr = 'https://plant-sense-api.onrender.com/';
+  final String addr = 'http://172.16.35.81:5000/';
 
   Future<List> getSpecies() async {
     List<dynamic> ty = [];
@@ -38,6 +40,19 @@ class _EntryState extends State<Entry> {
       throw Exception('Failed to load data');
     }
     return ty;
+  }
+
+  bool showBiometric = false;
+  bool isAuthenticated = false;
+  @override
+  void initState() {
+    isBiometricsAvailable();
+    super.initState();
+  }
+
+  isBiometricsAvailable() async {
+    showBiometric = await BiometricHelper().hasEnrolledBiometrics();
+    setState(() {});
   }
 
   @override
@@ -64,7 +79,14 @@ class _EntryState extends State<Entry> {
           ),
           const SizedBox(height: 30),
           FilledButton(
-            onPressed: () {
+            onPressed: () async {
+              if (!isAuthenticated) {
+                isAuthenticated = await BiometricHelper().authenticate();
+                setState(() {});
+              }
+
+              // if(isAuthenticated)
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -85,7 +107,10 @@ class _EntryState extends State<Entry> {
           FilledButton(
             onPressed: () async {
               List<dynamic> types = await getSpecies();
-
+              if (!isAuthenticated) {
+                isAuthenticated = await BiometricHelper().authenticate();
+                setState(() {});
+              }
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -98,6 +123,28 @@ class _EntryState extends State<Entry> {
             style: FilledButton.styleFrom(backgroundColor: Colors.green),
             child: Text(
               'Dictionary',
+              style: GoogleFonts.ebGaramond(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontStyle: FontStyle.normal),
+            ),
+          ),
+          const SizedBox(height: 30),
+          FilledButton(
+            onPressed: () async {
+              if (!isAuthenticated) {
+                isAuthenticated = await BiometricHelper().authenticate();
+                setState(() {});
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
+            style: FilledButton.styleFrom(backgroundColor: Colors.green),
+            child: Text(
+              'Help',
               style: GoogleFonts.ebGaramond(
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
