@@ -20,7 +20,7 @@ class _EntryState extends State<Entry> {
   // final String addr = 'http://172.16.35.179:5000/';
 
   // for hosted api
-  final String addr = 'http://172.16.35.81:5000/';
+  final String addr = 'https://plant-sense-api.onrender.com/';
 
   Future<List> getSpecies() async {
     List<dynamic> ty = [];
