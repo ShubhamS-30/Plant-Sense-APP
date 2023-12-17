@@ -23,8 +23,6 @@ class _DiseaseClassificationState extends State<DiseaseClassification> {
   List<dynamic>? scores = ['Please select an Image'];
   String? response;
 
-  // String get link => link;
-
   String get link {
     return widget.link;
   }
@@ -69,23 +67,24 @@ class _DiseaseClassificationState extends State<DiseaseClassification> {
   Widget build(context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 127, 60, 39),
+      appBar: AppBar(
+        title: Text(
+          "Disease Classification",
+          style: GoogleFonts.ebGaramond(
+              fontWeight: FontWeight.w700,
+              fontSize: 30,
+              color: Colors.white,
+              fontStyle: FontStyle.normal),
+        ),
+        backgroundColor: Colors.green,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          
           children: [
             const SizedBox(
               height: 50,
-            ),
-            Text(
-              "Disease Classification",
-              style: GoogleFonts.ebGaramond(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.italic),
-            ),
-            const SizedBox(
-              height: 25,
             ),
             ImageInput(
               onPickImage: (image) {

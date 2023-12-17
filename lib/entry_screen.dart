@@ -6,6 +6,7 @@ import 'package:plant_sense_1/dictionary_screen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:plant_sense_1/help.dart';
+import 'package:plant_sense_1/moistureSensor.dart';
 import 'biometric_helper.dart';
 
 class Entry extends StatefulWidget {
@@ -66,6 +67,9 @@ class _EntryState extends State<Entry> {
             width: 200,
             // color: const Color.fromARGB(150, 255, 255, 255),
           ),
+
+
+
           const SizedBox(
             height: 70,
           ),
@@ -77,16 +81,21 @@ class _EntryState extends State<Entry> {
                 color: Colors.white,
                 fontStyle: FontStyle.italic),
           ),
+
+
+
+
+
           const SizedBox(height: 30),
+
+
+
           FilledButton(
             onPressed: () async {
               if (!isAuthenticated) {
                 isAuthenticated = await BiometricHelper().authenticate();
                 setState(() {});
               }
-
-              // if(isAuthenticated)
-
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -103,7 +112,36 @@ class _EntryState extends State<Entry> {
                   fontStyle: FontStyle.normal),
             ),
           ),
+
+
           const SizedBox(height: 30),
+
+
+          FilledButton(
+            onPressed: () async {
+              if (!isAuthenticated) {
+                isAuthenticated = await BiometricHelper().authenticate();
+                setState(() {});
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const MoistureSensor()),
+              );
+            },
+            style: FilledButton.styleFrom(backgroundColor: Colors.green),
+            child: Text(
+              'Moisture Sensor',
+              style: GoogleFonts.ebGaramond(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontStyle: FontStyle.normal),
+            ),
+          ),
+
+          const SizedBox(height: 30),
+
           FilledButton(
             onPressed: () async {
               List<dynamic> types = await getSpecies();
@@ -130,7 +168,11 @@ class _EntryState extends State<Entry> {
                   fontStyle: FontStyle.normal),
             ),
           ),
+
+
           const SizedBox(height: 30),
+
+
           FilledButton(
             onPressed: () async {
               if (!isAuthenticated) {
