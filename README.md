@@ -21,4 +21,3 @@ Disease Currently Include -
 
 source code for API -> <https://github.com/ShubhamS-30/Plant-Sense-API>
 
-deployed link -> <https://plant-sense-api.onrender.com/>
